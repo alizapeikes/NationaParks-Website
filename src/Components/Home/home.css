@@ -1,0 +1,26 @@
+.cardActions{
+    display: "flex";
+    justify-content:"flex-start";
+    align-items: baseline;
+    vertical-align: bottom;
+}
+
+.video{
+    z-index: -1;
+    width: 100%;
+    height: 10%;
+}
+
+.searchBar{
+    display: block;
+    padding-top: 4%;
+    padding-bottom: 3%;
+}
+.paper {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cardActions{
+    align-content: right;
+}
