@@ -1,16 +1,17 @@
 {
-  "files": {
-    "main.css": "/NationaParks-Website/static/css/main.073c9b0a.css",
-    "main.js": "/NationaParks-Website/static/js/main.2a41bdb7.js",
-    "static/js/787.16071ffe.chunk.js": "/NationaParks-Website/static/js/787.16071ffe.chunk.js",
-    "static/media/logo.svg": "/NationaParks-Website/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/NationaParks-Website/index.html",
-    "main.073c9b0a.css.map": "/NationaParks-Website/static/css/main.073c9b0a.css.map",
-    "main.2a41bdb7.js.map": "/NationaParks-Website/static/js/main.2a41bdb7.js.map",
-    "787.16071ffe.chunk.js.map": "/NationaParks-Website/static/js/787.16071ffe.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.2a41bdb7.js"
-  ]
+  "main.css": "/NationaParks-Website/static/css/main.64106800.chunk.css",
+  "main.js": "/NationaParks-Website/static/js/main.0b30301b.chunk.js",
+  "main.js.map": "/NationaParks-Website/static/js/main.0b30301b.chunk.js.map",
+  "static/js/1.e89e90ab.chunk.js": "/NationaParks-Website/static/js/1.e89e90ab.chunk.js",
+  "static/js/1.e89e90ab.chunk.js.map": "/NationaParks-Website/static/js/1.e89e90ab.chunk.js.map",
+  "static/js/2.94928de2.chunk.js": "/NationaParks-Website/static/js/2.94928de2.chunk.js",
+  "static/js/2.94928de2.chunk.js.map": "/NationaParks-Website/static/js/2.94928de2.chunk.js.map",
+  "runtime~main.js": "/NationaParks-Website/static/js/runtime~main.faa47567.js",
+  "runtime~main.js.map": "/NationaParks-Website/static/js/runtime~main.faa47567.js.map",
+  "static/media/weather.png": "/NationaParks-Website/static/media/weather.0f27f8ed.png",
+  "static/media/NationalParkPic.png": "/NationaParks-Website/static/media/NationalParkPic.33467ecb.png",
+  "static/css/main.64106800.chunk.css.map": "/NationaParks-Website/static/css/main.64106800.chunk.css.map",
+  "index.html": "/NationaParks-Website/index.html",
+  "precache-manifest.e973dd2f3b8329ef2821441abd781326.js": "/NationaParks-Website/precache-manifest.e973dd2f3b8329ef2821441abd781326.js",
+  "service-worker.js": "/NationaParks-Website/service-worker.js"
 }
