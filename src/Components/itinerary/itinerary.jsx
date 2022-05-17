@@ -50,13 +50,13 @@ export const Itinerary = () => {
             <input
               type="hidden"
               name="Url"
-              value="https://alizapeikes.github.io/mcon-353-demo-site"
+              value="https://alizapeikes.github.io/NationaParks-Website/#/itinerary"
             />
             <input type="hidden" name="FileName" value="Itinerary" />
             <input type="submit" value="Convert file" />
           </form>
         </body>
-        {/* <DisplayThingsTodo /> */}
+        <DisplayThingsTodo />
       </Box>
     </Container>
   );

@@ -24,3 +24,9 @@
 .cardActions{
     align-content: right;
 }
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

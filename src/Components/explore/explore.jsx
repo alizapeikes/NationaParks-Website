@@ -44,6 +44,7 @@ export const Explore = () => {
     getPark();
   }, []);
   function getPark() {
+    console.log([park.parkCode]);
     fetch(
       `https://developer.nps.gov/api/v1/parks?parkCode=
         ${"park.parkCode"}
@@ -91,7 +92,7 @@ export const Explore = () => {
                 {park.fullName}
               </Typography>
               <Divider />
-              {thingsTodoList.length === 0 ? (
+              {park === "" ? (
                 <div>Please Choose a Park...</div>
               ) : (
                 <div>
@@ -219,7 +220,7 @@ const ThingsToDo = (props) => {
       >
         Things Todo
       </Typography>
-      {props.thingsTodoList &&
+      {props.thingsTodoList.length !== 0 ? (
         props.thingsTodoList.map((item, index) => (
           <ThingToDoItem
             key={index}
@@ -227,7 +228,10 @@ const ThingsToDo = (props) => {
             thingsTodo={thingsTodo}
             setThingsTodo={setThingsTodo}
           />
-        ))}
+        ))
+      ) : (
+        <div>No Things Todo Listed for the Park Selected</div>
+      )}
     </div>
   );
 };
@@ -255,30 +259,31 @@ const ThingToDoItem = (props) => {
           src={props.item.images[0].crops[0].url}
           alt={props.item.images[0].altText}
         ></img>
-
-        <div>
-          <Typography
-            fontWeight="bold"
-            sx={{
-              fontFamily: "Helvetica",
-            }}
-          >
-            {props.item.title}
-          </Typography>
-          <Typography sx={{ fontStyle: "italic", paddingBottom: "3%" }}>
-            Reservation Required:
-            {props.item.isReservationRequired === "true" ? " Yes" : " No"}
-          </Typography>
-          <Typography>{props.item.shortDescription}</Typography>
-        </div>
-        <div className="divAdd">
-          <Button
-            variant="outlined"
-            className="addButton"
-            onClick={() => addToItinerary()}
-          >
-            Add To Itinerary
-          </Button>
+        <div className="desc-text-and-button">
+          <div className="description-text">
+            <Typography
+              fontWeight="bold"
+              sx={{
+                fontFamily: "Helvetica",
+              }}
+            >
+              {props.item.title}
+            </Typography>
+            <Typography sx={{ fontStyle: "italic", paddingBottom: "3%" }}>
+              Reservation Required:
+              {props.item.isReservationRequired === "true" ? " Yes" : " No"}
+            </Typography>
+            <Typography>{props.item.shortDescription}</Typography>
+          </div>
+          <div className="add-button-wrapper">
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#4B90F0" }}
+              onClick={() => addToItinerary()}
+            >
+              Add To Itinerary
+            </Button>
+          </div>
         </div>
       </Stack>
     </div>

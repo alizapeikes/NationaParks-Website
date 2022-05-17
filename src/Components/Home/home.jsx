@@ -225,7 +225,11 @@ const NationalParksCard = (props) => {
   }
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345, height: "100%" }} key={props.index}>
+      <Card
+        sx={{ maxWidth: 345, height: "100%" }}
+        key={props.index}
+        className="card"
+      >
         <CardActionArea>
           <CardMedia
             component="img"
