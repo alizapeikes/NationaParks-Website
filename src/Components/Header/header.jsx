@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const pages = [
   { title: "Home", path: "/" },
   { title: "Explore A Park", path: "/explore" },
-  { title: "Create Itinerary", path: "/itinerary" },
+  { title: "My Itinerary", path: "/itinerary" },
   { title: "Wish List", path: "/wishList" },
 ];
 

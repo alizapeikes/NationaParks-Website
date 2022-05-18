@@ -3,6 +3,7 @@ import {Home} from '../Home/home';
 import {Header} from '../Header/header';
 import {Explore} from '../explore/explore'
 import {Itinerary } from '../itinerary/itinerary';
+import {Footer} from  '../Footer/footer'
 import {WishList} from '../WishList/wishList'
 import {DisplayParkProvider} from "../State/displayParkContext";
 import {WishListProvider } from '../State/wishListContext';
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/itinerary" element={<Itinerary />} /> 
                 <Route path="/wishList" element={<WishList />} /> 
             </Routes>
+            <Footer />
           </HashRouter>
           </ThingsTodoProvider>
           </WishListProvider>

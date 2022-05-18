@@ -183,10 +183,20 @@ const NationalParks = (props) => {
   return (
     <div>
       {/* <video autoPlay loop muted className="video">
-        <source src={video} type="video/mp4"></source>
+        <source src="https://youtu.be/Z1dMZDNZWCw" type="video/mp4"></source>
       </video> */}
+      <iframe
+        width="560"
+        height="315"
+        //src="https://www.youtube.com/embed/Z1dMZDNZWCw?autoplay=1&controls=0&playlist=Z1dMZDNZWCw&loop=1&ing=1"
+        src="https://www.youtube.com/embed/Z1dMZDNZWCw?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
       <SearchBar getParks={props.setParks} setParks={props.setParks} />
-      <SearchByState />
+      {/* <SearchByState /> */}
       <Box
         display="flex"
         alignItems="center"
@@ -210,16 +220,19 @@ const NationalParks = (props) => {
 const NationalParksCard = (props) => {
   const [openAlert, setOpenAlert] = React.useState(false);
   const { wishList, setWishList } = useContext(WishListContext);
-  const [alert, setAlert] = useState("Park added to wishlist!");
+  const [alertText, setAlertText] = useState("Park added to wishlist!");
+  const [alertType, setAlertType] = useState("success");
   function addToWishList() {
     const tempList = [...wishList];
     const index = tempList.findIndex((park) => park.id === props.item.id);
     if (index === -1) {
-      setAlert("Park added to Wish List!");
       const newWishList = [...wishList, props.item];
       setWishList(newWishList);
+      setAlertText("Park added to Wish List!");
+      setAlertType("success");
     } else {
-      setAlert("Park already in Wish List!");
+      setAlertText("Park already in Wish List!");
+      setAlertType("info");
     }
     setOpenAlert(true);
   }
@@ -249,7 +262,8 @@ const NationalParksCard = (props) => {
             park={props.item}
             openAlert={openAlert}
             setOpenAlert={setOpenAlert}
-            alert={alert}
+            alert={alertText}
+            alertType={alertType}
           />
           <Tooltip title="Add to Wish List">
             <IconButton onClick={() => addToWishList()}>
@@ -272,6 +286,7 @@ const IconAlert = (props) => {
   return (
     <Collapse in={props.openAlert}>
       <Alert
+        severity={props.alertType}
         action={
           <IconButton
             aria-label="close"
@@ -396,7 +411,7 @@ const BottomStepperBar = (props) => {
   }
 
   return (
-    <Box>
+    <Box margin="2%">
       <BottomNavigation
         showLabels
         value={value}

@@ -32,6 +32,10 @@ import ListItem from "@mui/material/ListItem";
 import EmailIcon from "@mui/icons-material/Email";
 import Divider from "@mui/material/Divider";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import Alert from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 export const Explore = () => {
   const { park, setPark } = useContext(DisplayParkContext);
@@ -95,7 +99,7 @@ export const Explore = () => {
               {park === "" ? (
                 <div>Please Choose a Park...</div>
               ) : (
-                <div>
+                <div className="main-content">
                   <Display
                     choice={choice}
                     park={park}
@@ -113,21 +117,11 @@ export const Explore = () => {
 };
 
 const Display = (props) => {
-  // useEffect(() => {
-  //   {
-  //     fetch(
-  //       `https://developer.nps.gov/api/v1/thingstodo?parkCode=
-  //     ${"park.parkCode"}
-  //   &api_key=${"8yqhe2WFRMWYNZgBFRmxnub058irC6R85P9uUSIE"}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => props.setThingsTodoList(data.data));
-  //   }
-  // }, []);
   switch (props.choice) {
     case 0:
-      console.log(props.thingsTodoList);
-      return <ThingsToDo thingsTodoList={props.thingsTodoList} />;
+      return (
+        <ThingsToDo thingsTodoList={props.thingsTodoList} park={props.park} />
+      );
     case 1:
       return <Contact park={props.park} />;
     case 2:
@@ -192,15 +186,11 @@ const SideNav = (props) => {
         value={props.choice}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        // sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab className="tab" label="Things To Do" {...a11yProps(0)} />
         <Tab className="tab" label="Contact" {...a11yProps(1)} />
         <Tab className="tab" label="Arrival Info" {...a11yProps(2)} />
         <Tab className="tab" label="Weather" {...a11yProps(3)} />
-        {/* <Tab className="tab" label="Item five" {...a11yProps(4)} />
-        <Tab className="tab" label="Item Six" {...a11yProps(5)} />
-        <Tab className="tab" label="Item Seven" {...a11yProps(6)} /> */}
       </Tabs>
     </Box>
   );
@@ -211,54 +201,95 @@ const ThingsToDo = (props) => {
 
   return (
     <div>
-      <Typography
-        marginTop="5%"
-        gutterBottom
-        variant="h4"
-        component="div"
-        align="center"
-      >
-        Things Todo
-      </Typography>
-      {props.thingsTodoList.length !== 0 ? (
-        props.thingsTodoList.map((item, index) => (
-          <ThingToDoItem
-            key={index}
-            item={item}
-            thingsTodo={thingsTodo}
-            setThingsTodo={setThingsTodo}
-          />
-        ))
-      ) : (
-        <div>No Things Todo Listed for the Park Selected</div>
-      )}
+      <Container className="centerItem">
+        <Box
+          className="centerItem"
+          sx={{
+            boxShadow: 2,
+            bgcolor: (theme) =>
+              theme.palette.mode === "dark" ? "#101010" : "#fff",
+            color: (theme) =>
+              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+            p: 10,
+            m: 1,
+            borderRadius: 2,
+            // textAlign: "center",
+            //width: "90%",
+            borderRight: "auto",
+            borderLeft: "auto",
+          }}
+        >
+          <Typography gutterBottom variant="h4" component="div" align="center">
+            Things To Do
+          </Typography>
+          {props.thingsTodoList.length !== 0 ? (
+            props.thingsTodoList.map((item, index) => (
+              <ThingToDoItem
+                key={index}
+                item={item}
+                thingsTodo={thingsTodo}
+                setThingsTodo={setThingsTodo}
+                park={props.park}
+              />
+            ))
+          ) : (
+            <div>No information found for the selected park</div>
+          )}
+        </Box>
+      </Container>
     </div>
   );
 };
 
 const ThingToDoItem = (props) => {
+  const [open, setOpen] = useState(false);
+  const [alertText, setAlertText] = useState("Added!");
+  const [alertType, setAlertType] = useState("success");
   function addToItinerary() {
-    const newThingsTodo = [
-      ...props.thingsTodo,
-      {
-        name: props.item.title,
-        description: props.item.shortDescription,
-        reservation: props.item.isReservationRequired,
-        image: props.item.images[0].crops[0].url,
-      },
-    ];
-    props.setThingsTodo(newThingsTodo);
-    console.log(props.thingsTodo);
+    const tempList = [...props.thingsTodo.list];
+    const index = tempList.findIndex((todo) => todo.id === props.item.id);
+    console.log("thing context: " + props.thingsTodo.name);
+    console.log("curr Park " + props.park.fullName);
+    if (props.thingsTodo.name !== props.park.fullName) {
+      console.log("in if");
+      props.setThingsTodo({ name: props.park.fullName, list: [] });
+    }
+    if (index === -1) {
+      const newThingsTodo = [
+        ...props.thingsTodo.list,
+        {
+          id: props.item.id,
+          name: props.item.title,
+          description: props.item.shortDescription,
+          reservation: props.item.isReservationRequired,
+          image: props.item.images[0].url,
+        },
+      ];
+      props.setThingsTodo({ name: props.park.fullName, list: newThingsTodo });
+      setAlertText("Added!");
+      setAlertType("success");
+    } else {
+      setAlertText("Already in Itinerary");
+      setAlertType("info");
+    }
+    setOpen(true);
   }
   return (
     <div>
       <Stack paddingTop="5%" direction="row" spacing={2}>
-        <img
-          height="10%"
-          width="50%"
-          src={props.item.images[0].crops[0].url}
-          alt={props.item.images[0].altText}
-        ></img>
+        <div>
+          <img
+            minHeight="325px"
+            minWidth="400px"
+            height="325px"
+            width="400px"
+            className="thingstodo-image"
+            // src={props.item.images[0].crops[0].url}
+            src={props.item.images[0].url}
+            alt={props.item.images[0].altText}
+          ></img>
+        </div>
+
         <div className="desc-text-and-button">
           <div className="description-text">
             <Typography
@@ -284,16 +315,51 @@ const ThingToDoItem = (props) => {
               Add To Itinerary
             </Button>
           </div>
+          <div className="added-to-itinerary-alert">
+            <AddedToItineraryAlert
+              open={open}
+              setOpen={setOpen}
+              alertText={alertText}
+              alertType={alertType}
+            />
+          </div>
         </div>
       </Stack>
     </div>
   );
 };
 
+const AddedToItineraryAlert = (props) => {
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Collapse in={props.open}>
+        <Alert
+          severity={props.alertType}
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                props.setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          {props.alertText}
+        </Alert>
+      </Collapse>
+    </Box>
+  );
+};
+
 const Weather = (props) => {
   return (
     <div className="centerItem">
-      <Card className="centerItem" sx={{ maxWidth: "80%", marginTop: "5%" }}>
+      <Card className="centerItem" sx={{ width: "77%", marginTop: "5%" }}>
         <CardActionArea>
           <CardContent>
             <Typography
@@ -342,7 +408,6 @@ const Contact = (props) => {
     <div>
       <Container className="centerItem">
         <Box
-          className="centerItem"
           sx={{
             boxShadow: 2,
             bgcolor: (theme) =>
@@ -470,37 +535,37 @@ const Arrival = (props) => {
                 <ListItem key={index}>
                   <ListItemText primary={item.description} />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem className="operating-hours-info" key={index}>
                   <ListItemText
                     primary={"Sunday: " + item.standardHours.sunday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem className="operating-hours-info" key={index}>
                   <ListItemText
                     primary={"Monday: " + item.standardHours.monday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem className="operating-hours-info" key={index}>
                   <ListItemText
                     primary={"Tuesday: " + item.standardHours.tuesday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem key={index} className="operating-hours-info">
                   <ListItemText
                     primary={"Wednesday: " + item.standardHours.wednesday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem key={index} className="operating-hours-info">
                   <ListItemText
                     primary={"Thursday: " + item.standardHours.thursday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem key={index} className="operating-hours-info">
                   <ListItemText
                     primary={"Friday: " + item.standardHours.friday}
                   />
                 </ListItem>
-                <ListItem key={index}>
+                <ListItem key={index} className="operating-hours-info">
                   <ListItemText
                     primary={"Saturday: " + item.standardHours.saturday}
                   />
@@ -523,7 +588,7 @@ const Arrival = (props) => {
                     <ListItemText primary={"Descrption: " + item.description} />
                   </ListItem>
                   <ListItem>
-                    <ListItemText primary={"Cost: " + item.cost} />
+                    <ListItemText primary={"Cost: $" + item.cost} />
                   </ListItem>
                   <Divider />
                 </div>
@@ -545,7 +610,7 @@ const Arrival = (props) => {
                     <ListItemText primary={"Descrption: " + item.description} />
                   </ListItem>
                   <ListItem>
-                    <ListItemText primary={"Cost: " + item.cost} />
+                    <ListItemText primary={"Cost: $" + item.cost} />
                   </ListItem>
                   <Divider />
                 </div>

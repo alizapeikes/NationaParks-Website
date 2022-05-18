@@ -15,6 +15,7 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
+import Divider from "@mui/material/Divider";
 
 import {
   Button,
@@ -29,9 +30,6 @@ import {
   DialogActions,
   Grid,
   IconButton,
-  Alert,
-  InputBase,
-  TextField,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 
@@ -39,7 +37,7 @@ export const WishList = () => {
   const { wishList, setWishList } = useContext(WishListContext);
 
   return (
-    <div>
+    <div className="mainDiv">
       <NationalParks wishList={wishList} setWishList={setWishList} />
     </div>
   );
@@ -49,10 +47,26 @@ const NationalParks = (props) => {
   return (
     <div>
       <Box
+        sx={{
+          margin: "5%",
+          display: "block",
+          alignItems: "center",
+        }}
+      >
+        <Typography align="center" variant="h4">
+          My National Park Wish List
+        </Typography>
+        <Divider variant="middle" />
+      </Box>
+      <Box
         display="flex"
         alignItems="center"
-        justifyContent="center"
-        sx={{ marginRight: "auto", marginLeft: "auto", width: "95%" }}
+        sx={{
+          marginRight: "auto",
+          marginLeft: "auto",
+          width: "95%",
+          marginTop: "4%",
+        }}
       >
         <Grid container spacing={4}>
           {props.wishList.length === 0 ? (
@@ -83,7 +97,17 @@ const NationalParksCard = (props) => {
   }
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345, height: "100%" }} key={props.index}>
+      {console.log(props.item)}
+      <Card
+        sx={{
+          maxWidth: 345,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+        key={props.index}
+      >
         <CardActionArea>
           <CardMedia
             component="img"

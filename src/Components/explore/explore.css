@@ -6,6 +6,7 @@
 .add-button-wrapper{
     display: inline-block;
     margin-top: 3%;
+    width: 100% !important;
 }
 
 .parkTitle{
@@ -29,4 +30,34 @@
     justify-content: flex-start;
     /* justify-content: space-between; */
     padding: 10px 0 10px 0;
+}
+
+.thingstodo-image {
+    border-radius: 22px;
+}
+
+thingstodo-display{
+    display: flex;
+    width: 70%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.operating-hours-info{
+    margin-left: 3%;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.added-to-itinerary-alert{
+    display: inline-block;
+    margin-top: 2%;
+    width: 35%;
 }
