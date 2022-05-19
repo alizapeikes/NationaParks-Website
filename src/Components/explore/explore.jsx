@@ -38,7 +38,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
 export const Explore = () => {
-  const { park, setPark } = useContext(DisplayParkContext);
+  const parkContext = useContext(DisplayParkContext);
   const [currPark, setCurrPark] = useState([]);
   const [thingsTodoList, setThingsTodoList] = useState([]);
   const [choice, setChoice] = useState(0);
@@ -48,10 +48,10 @@ export const Explore = () => {
     getPark();
   }, []);
   function getPark() {
-    console.log([park.parkCode]);
+    console.log([parkContext.parkState.parkCode]);
     fetch(
       `https://developer.nps.gov/api/v1/parks?parkCode=
-        ${"park.parkCode"}
+        ${parkContext.parkState.parkCode}
       &api_key=${"8yqhe2WFRMWYNZgBFRmxnub058irC6R85P9uUSIE"}`
     )
       .then((response) => response.json())
@@ -59,7 +59,7 @@ export const Explore = () => {
 
     fetch(
       `https://developer.nps.gov/api/v1/alerts?parkCode=
-          ${"park.parkCode"}
+          ${parkContext.parkState.parkCode}
         &api_key=${"8yqhe2WFRMWYNZgBFRmxnub058irC6R85P9uUSIE"}`
     )
       .then((response) => response.json())
@@ -67,7 +67,7 @@ export const Explore = () => {
 
     fetch(
       `https://developer.nps.gov/api/v1/thingstodo?parkCode=${
-        park.parkCode
+        parkContext.parkState.parkCode
       }&api_key=${"IwDmrGWpHFkUs5tLwy2Miv7L7M1nIoSndJyqltEk"}`
     )
       .then((response) => response.json())
@@ -93,16 +93,16 @@ export const Explore = () => {
             </Grid>
             <Grid item xs={9.5}>
               <Typography className="parkTitle" variant="h2" align="center">
-                {park.fullName}
+                {parkContext.parkState.fullName}
               </Typography>
               <Divider />
-              {park === "" ? (
+              {parkContext.parkState.parkCode === "" ? (
                 <div>Please Choose a Park...</div>
               ) : (
                 <div className="main-content">
                   <Display
                     choice={choice}
-                    park={park}
+                    park={parkContext.parkState}
                     thingsTodoList={thingsTodoList}
                     setThingsTodoList={setThingsTodoList}
                   />
@@ -217,6 +217,8 @@ const ThingsToDo = (props) => {
             //width: "90%",
             borderRight: "auto",
             borderLeft: "auto",
+            marginRight: "auto",
+            marginLeft: "auto",
           }}
         >
           <Typography gutterBottom variant="h4" component="div" align="center">
@@ -248,12 +250,6 @@ const ThingToDoItem = (props) => {
   function addToItinerary() {
     const tempList = [...props.thingsTodo.list];
     const index = tempList.findIndex((todo) => todo.id === props.item.id);
-    console.log("thing context: " + props.thingsTodo.name);
-    console.log("curr Park " + props.park.fullName);
-    if (props.thingsTodo.name !== props.park.fullName) {
-      console.log("in if");
-      props.setThingsTodo({ name: props.park.fullName, list: [] });
-    }
     if (index === -1) {
       const newThingsTodo = [
         ...props.thingsTodo.list,
@@ -359,9 +355,9 @@ const AddedToItineraryAlert = (props) => {
 const Weather = (props) => {
   return (
     <div className="centerItem">
-      <Card className="centerItem" sx={{ width: "77%", marginTop: "5%" }}>
+      <Card className="centerItem" sx={{ width: "80%", marginTop: ".8%" }}>
         <CardActionArea>
-          <CardContent>
+          <CardContent sx={{ paddingTop: "8%" }}>
             <Typography
               gutterBottom
               variant="h4"
@@ -418,9 +414,11 @@ const Contact = (props) => {
             m: 1,
             borderRadius: 2,
             // textAlign: "center",
-            width: "70%",
+            width: "85%",
             borderRight: "auto",
             borderLeft: "auto",
+            marginRight: "auto",
+            marginLeft: "auto",
           }}
         >
           <Typography gutterBottom variant="h4" component="div" align="center">
@@ -518,9 +516,11 @@ const Arrival = (props) => {
             m: 1,
             borderRadius: 2,
             // textAlign: "center",
-            width: "70%",
+            width: "85%",
             borderRight: "auto",
             borderLeft: "auto",
+            marginRight: "auto",
+            marginLeft: "auto",
           }}
         >
           <Typography gutterBottom variant="h4" component="div" align="center">

@@ -24,30 +24,15 @@ export const Itinerary = () => {
           borderRadius: 2,
           //textAlign: "center",
           width: "80%",
-          borderRight: "auto",
-          borderLeft: "auto",
+          marginRight: "auto",
+          marginLeft: "auto",
         }}
       >
         <Typography sx={{ fontFamily: "Georgia" }} variant="h3" align="center">
           My {" " + thingsTodo.name + " "} Itinerary
         </Typography>
         {/* <Button>Hello</Button> */}
-        <body>
-          <form
-            action="https://v2.convertapi.com/convert/web/to/pdf?Secret=5Gf4ohFCNhAoRjcI&download=attachment"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <input
-              type="hidden"
-              name="Url"
-              value="https://alizapeikes.github.io/NationaParks-Website/#/itinerary"
-            />
-            <input type="hidden" name="FileName" value="Itinerary" />
-            <input type="hidden" name="ConversionDelay" value="20" />
-            <input type="submit" value="Convert file" />
-          </form>
-        </body>
+
         <DisplayThingsTodo thingsTodo={thingsTodo} />
       </Box>
     </Container>
