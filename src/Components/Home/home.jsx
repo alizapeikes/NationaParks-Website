@@ -116,7 +116,7 @@ const NationalParks = (props) => {
       {/* <video autoPlay loop muted className="video">
         <source src="https://youtu.be/Z1dMZDNZWCw" type="video/mp4"></source>
       </video> */}
-      <iframe
+      {/* <iframe
         width="560"
         height="315"
         //src="https://www.youtube.com/embed/Z1dMZDNZWCw?autoplay=1&controls=0&playlist=Z1dMZDNZWCw&loop=1&ing=1"
@@ -125,9 +125,8 @@ const NationalParks = (props) => {
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-      ></iframe>
+      ></iframe> */}
       <SearchBar getParks={props.setParks} setParks={props.setParks} />
-      {/* <SearchByState /> */}
       <Box
         display="flex"
         alignItems="center"
