@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 // import video from "../../Images/parksvideo.mp4";
+import { ThingsTodoContext } from "../State/thingsToDoContext";
 import "./home.css";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
@@ -64,76 +65,6 @@ export const Home = () => {
   );
 };
 
-const States = [
-  "AK - Alaska",
-  "AL - Alabama",
-  "AR - Arkansas",
-  "AS - American Samoa",
-  "AZ - Arizona",
-  "CA - California",
-  "CO - Colorado",
-  "CT - Connecticut",
-  "DC - District of Columbia",
-  "DE - Delaware",
-  "FL - Florida",
-  "GA - Georgia",
-  "GU - Guam",
-  "HI - Hawaii",
-  "IA - Iowa",
-  "ID - Idaho",
-  "IL - Illinois",
-  "IN - Indiana",
-  "KS - Kansas",
-  "KY - Kentucky",
-  "LA - Louisiana",
-  "MA - Massachusetts",
-  "MD - Maryland",
-  "ME - Maine",
-  "MI - Michigan",
-  "MN - Minnesota",
-  "MO - Missouri",
-  "MS - Mississippi",
-  "MT - Montana",
-  "NC - North Carolina",
-  "ND - North Dakota",
-  "NE - Nebraska",
-  "NH - New Hampshire",
-  "NJ - New Jersey",
-  "NM - New Mexico",
-  "NV - Nevada",
-  "NY - New York",
-  "OH - Ohio",
-  "OK - Oklahoma",
-  "OR - Oregon",
-  "PA - Pennsylvania",
-  "PR - Puerto Rico",
-  "RI - Rhode Island",
-  "SC - South Carolina",
-  "SD - South Dakota",
-  "TN - Tennessee",
-  "TX - Texas",
-  "UT - Utah",
-  "VA - Virginia",
-  "VI - Virgin Islands",
-  "VT - Vermont",
-  "WA - Washington",
-  "WI - Wisconsin",
-  "WV - West Virginia",
-  "WY - Wyoming",
-];
-const SearchByState = () => {
-  return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={States}
-      sx={{ width: 300 }}
-      renderInput={(params) => (
-        <TextField id="standard-basic" {...params} label="State" />
-      )}
-    />
-  );
-};
 const SearchBar = (props) => {
   const [searchWord, setSearchWord] = useState("");
   function handleChange(event) {
@@ -313,7 +244,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const QuickView = (props) => {
   const [open, setOpen] = React.useState(false);
-  const { park, setPark } = useContext(DisplayParkContext);
+  const parkContext = useContext(DisplayParkContext);
+  const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
   const navigate = useNavigate();
 
   const handleClickOpen = () => {
@@ -325,7 +257,8 @@ const QuickView = (props) => {
   };
 
   const explorePark = () => {
-    setPark(props.item);
+    parkContext.parkCodeDispatch({ parkInfo: props.item });
+    setThingsTodo({ name: props.item.fullName, list: [] });
     navigate("/explore");
   };
   return (

@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useReducer } from "react";
+
+const changeDisplayedParkContext = (state, action) => {
+  const newParkInfo = action.parkInfo;
+  return newParkInfo;
+};
 
 export const DisplayParkContext = React.createContext();
 
+const initialPark = {};
+
 export const DisplayParkProvider = (props) => {
-  const [park, setPark] = useState("");
+  const [parkStateInfo, dispatchSetPark] = useReducer(
+    changeDisplayedParkContext,
+    initialPark
+  );
   return (
-    <DisplayParkContext.Provider value={{ park, setPark }}>
+    <DisplayParkContext.Provider
+      value={{ parkState: parkStateInfo, parkCodeDispatch: dispatchSetPark }}
+    >
       {props.children}
     </DisplayParkContext.Provider>
   );
