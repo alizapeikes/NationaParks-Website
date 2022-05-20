@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DisplayParkContext } from "../State/displayParkContext";
 import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { CardActionArea } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import { Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import Tabs from "@mui/material/Tabs";
@@ -15,7 +12,6 @@ import Tab from "@mui/material/Tab";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import PropTypes from "prop-types";
 import Stack from "@mui/material/Stack";
-import { shadows } from "@mui/system";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import Container from "@mui/material/Container";
 import "./explore.css";
@@ -23,7 +19,6 @@ import CardContent from "@mui/material/CardContent";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
 import weatherPic from "../../Images/weather.png";
 import CardMedia from "@mui/material/CardMedia";
-import MovingText from "react-moving-text";
 import NPPic from "../../Images/NationalParkPic.png";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -31,7 +26,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import EmailIcon from "@mui/icons-material/Email";
 import Divider from "@mui/material/Divider";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
@@ -76,8 +70,6 @@ export const Explore = () => {
   return (
     <div>
       <img src={NPPic} alt={""} width="100%"></img>
-      {/* <Button onClick={() => getPark()}>hello</Button> */}
-      {/* <MovingAlerts alertData={alertData} /> */}
 
       {currPark.length === 0 ? (
         <div>loading...</div>
@@ -213,8 +205,6 @@ const ThingsToDo = (props) => {
             p: 10,
             m: 1,
             borderRadius: 2,
-            // textAlign: "center",
-            //width: "90%",
             borderRight: "auto",
             borderLeft: "auto",
             marginRight: "auto",
@@ -280,7 +270,6 @@ const ThingToDoItem = (props) => {
             height="325px"
             width="400px"
             className="thingstodo-image"
-            // src={props.item.images[0].crops[0].url}
             src={props.item.images[0].url}
             alt={props.item.images[0].altText}
           ></img>
@@ -381,24 +370,7 @@ const Weather = (props) => {
     </div>
   );
 };
-// const MovingAlerts = (props) => {
-//   return (
-//     <div>
-//       <MovingText
-//         className="movingText"
-//         type="slideOutToRight"
-//         duration="50s"
-//         delay="0s"
-//         direction="normal"
-//         timing="ease"
-//         iteration="infinite"
-//         fillMode="none"
-//       >
-//         {props.alertData[0].title}
-//       </MovingText>
-//     </div>
-//   );
-// };
+
 const Contact = (props) => {
   return (
     <div>
@@ -413,7 +385,6 @@ const Contact = (props) => {
             p: 10,
             m: 1,
             borderRadius: 2,
-            // textAlign: "center",
             width: "85%",
             borderRight: "auto",
             borderLeft: "auto",
@@ -515,7 +486,6 @@ const Arrival = (props) => {
             p: 10,
             m: 1,
             borderRadius: 2,
-            // textAlign: "center",
             width: "85%",
             borderRight: "auto",
             borderLeft: "auto",

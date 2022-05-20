@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import CssBaseline from "@mui/material/CssBaseline";
-import "./footer.css";
 
 export const Footer = () => {
   return (

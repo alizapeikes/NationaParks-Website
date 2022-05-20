@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-// import video from "../../Images/parksvideo.mp4";
+import video from "../../Images/parksvideo.mp4";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
 import "./home.css";
 import Collapse from "@mui/material/Collapse";
@@ -17,7 +17,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import Autocomplete from "@mui/material/Autocomplete";
 import {
   Button,
   CardActionArea,
@@ -32,10 +31,7 @@ import {
   Grid,
   IconButton,
   Alert,
-  Icon,
   InputBase,
-  Divider,
-  TextField,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -113,22 +109,13 @@ const SearchBar = (props) => {
 const NationalParks = (props) => {
   return (
     <div>
-      {/* <video autoPlay loop muted className="video">
+      <video autoPlay loop muted className="video">
         <source
           src={video}
           type="video/mp4"
           //backround="true"
         ></source>
-      </video> */}
-      {/* <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/Z1dMZDNZWCw?controls=0"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe> */}
+      </video>
 
       <SearchBar getParks={props.setParks} setParks={props.setParks} />
       <Box
@@ -309,7 +296,7 @@ function Carousel(props) {
   };
 
   return (
-    <Box sx={{ /* maxWidth: 400,*/ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -324,7 +311,6 @@ function Carousel(props) {
                 sx={{
                   height: 300,
                   display: "block",
-                  // maxWidth: 400,
                   overflow: "hidden",
                   width: "100%",
                 }}
