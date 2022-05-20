@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import video from "../../Images/parksvideo.mp4";
+// import video from "../../Images/parksvideo.mp4";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
 import "./home.css";
 import Collapse from "@mui/material/Collapse";
@@ -113,13 +113,13 @@ const SearchBar = (props) => {
 const NationalParks = (props) => {
   return (
     <div>
-      <video autoPlay loop muted className="video">
+      {/* <video autoPlay loop muted className="video">
         <source
           src={video}
           type="video/mp4"
           //backround="true"
         ></source>
-      </video>
+      </video> */}
       {/* <iframe
         width="560"
         height="315"
