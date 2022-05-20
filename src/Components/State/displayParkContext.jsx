@@ -1,7 +1,8 @@
 import React, { useReducer } from "react";
 
 const changeDisplayedParkContext = (state, action) => {
-  const newParkInfo = action.parkInfo;
+  const newParkInfo = JSON.parse(JSON.stringify(action.parkInfo));
+
   return newParkInfo;
 };
 

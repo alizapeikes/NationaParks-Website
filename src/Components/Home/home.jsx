@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-// import video from "../../Images/parksvideo.mp4";
+import video from "../../Images/parksvideo.mp4";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
 import "./home.css";
 import Collapse from "@mui/material/Collapse";
@@ -113,19 +113,23 @@ const SearchBar = (props) => {
 const NationalParks = (props) => {
   return (
     <div>
-      {/* <video autoPlay loop muted className="video">
-        <source src="https://youtu.be/Z1dMZDNZWCw" type="video/mp4"></source>
-      </video> */}
+      <video autoPlay loop muted className="video">
+        <source
+          src={video}
+          type="video/mp4"
+          //backround="true"
+        ></source>
+      </video>
       {/* <iframe
         width="560"
         height="315"
-        //src="https://www.youtube.com/embed/Z1dMZDNZWCw?autoplay=1&controls=0&playlist=Z1dMZDNZWCw&loop=1&ing=1"
-        src="https://www.youtube.com/embed/Z1dMZDNZWCw?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
+        src="https://www.youtube.com/embed/Z1dMZDNZWCw?controls=0"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe> */}
+
       <SearchBar getParks={props.setParks} setParks={props.setParks} />
       <Box
         display="flex"

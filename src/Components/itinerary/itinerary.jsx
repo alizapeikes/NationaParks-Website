@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -6,10 +6,11 @@ import { Typography, Stack, Button } from "@mui/material";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
 import CardMedia from "@mui/material/CardMedia";
 import "./itinerary.css";
+import html2canvas from "html2canvas";
 
 export const Itinerary = () => {
   const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
-
+  const exportRef = useRef();
   return (
     <Container>
       <Box
@@ -31,7 +32,6 @@ export const Itinerary = () => {
         <Typography sx={{ fontFamily: "Georgia" }} variant="h3" align="center">
           My {" " + thingsTodo.name + " "} Itinerary
         </Typography>
-        {/* <Button>Hello</Button> */}
 
         <DisplayThingsTodo thingsTodo={thingsTodo} />
       </Box>
