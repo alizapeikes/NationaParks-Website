@@ -93,7 +93,6 @@ const NationalParksCard = (props) => {
   }
   return (
     <Grid item xs={3}>
-      {console.log(props.item)}
       <Card
         sx={{
           maxWidth: 345,

@@ -41,7 +41,6 @@ export const Explore = () => {
     getPark();
   }, []);
   function getPark() {
-    console.log([parkContext.parkState.parkCode]);
     fetch(
       `https://developer.nps.gov/api/v1/parks?parkCode=
         ${parkContext.parkState.parkCode}
@@ -79,7 +78,6 @@ export const Explore = () => {
                 {parkContext.parkState.fullName}
               </Typography>
               <Divider />
-              {console.log(parkContext.parkState)}
               {parkContext.parkState.name === "no park chosen" ? (
                 <div>Please Choose a Park...</div>
               ) : (
