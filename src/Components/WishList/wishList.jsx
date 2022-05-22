@@ -66,7 +66,7 @@ const NationalParks = (props) => {
       >
         <Grid container spacing={4}>
           {props.wishList.length === 0 ? (
-            <div>WishList is Empty.</div>
+            <div>Wish List is Empty.</div>
           ) : (
             props.wishList.map((item, index) => (
               <NationalParksCard

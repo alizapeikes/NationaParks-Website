@@ -8,7 +8,7 @@ const changeDisplayedParkContext = (state, action) => {
 
 export const DisplayParkContext = React.createContext();
 
-const initialPark = {};
+const initialPark = { name: "no park chosen" };
 
 export const DisplayParkProvider = (props) => {
   const [parkStateInfo, dispatchSetPark] = useReducer(

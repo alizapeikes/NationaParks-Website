@@ -79,7 +79,8 @@ export const Explore = () => {
                 {parkContext.parkState.fullName}
               </Typography>
               <Divider />
-              {parkContext.parkState.parkCode === "" ? (
+              {console.log(parkContext.parkState)}
+              {parkContext.parkState.name === "no park chosen" ? (
                 <div>Please Choose a Park...</div>
               ) : (
                 <div className="main-content">
@@ -100,6 +101,9 @@ export const Explore = () => {
 };
 
 const Display = (props) => {
+  if (props.park.name === "no park chosen") {
+    return <div>Please choose a park</div>;
+  }
   switch (props.choice) {
     case 0:
       return (
