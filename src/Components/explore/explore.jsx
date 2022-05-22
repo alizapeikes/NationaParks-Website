@@ -546,7 +546,9 @@ const Arrival = (props) => {
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary={"Descrption: " + item.description} />
+                    <ListItemText
+                      primary={"Description: " + item.description}
+                    />
                   </ListItem>
                   <ListItem>
                     <ListItemText primary={"Cost: $" + item.cost} />
