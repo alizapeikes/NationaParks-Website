@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Collapse from "@mui/material/Collapse";
-import CloseIcon from "@mui/icons-material/Close";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DisplayParkContext } from "../State/displayParkContext";
 import { WishListContext } from "../State/wishListContext";
-import { WishListProvider } from "../State/wishListContext";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import SwipeableViews from "react-swipeable-views";
@@ -21,7 +17,6 @@ import {
   Button,
   CardActionArea,
   CardActions,
-  Paper,
   Slide,
   Dialog,
   DialogTitle,

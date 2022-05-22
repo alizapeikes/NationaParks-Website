@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Typography, Stack } from "@mui/material";
@@ -8,7 +8,6 @@ import "./itinerary.css";
 
 export const Itinerary = () => {
   const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
-  const exportRef = useRef();
   return (
     <Container>
       <Box
@@ -21,7 +20,6 @@ export const Itinerary = () => {
           p: 10,
           m: 5,
           borderRadius: 2,
-          //textAlign: "center",
           width: "80%",
           marginRight: "auto",
           marginLeft: "auto",

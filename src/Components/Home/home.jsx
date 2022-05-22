@@ -38,6 +38,7 @@ import Box from "@mui/material/Box";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import Tooltip from "@mui/material/Tooltip";
+import { loading } from "../../Images/loading.jpg";
 
 export const Home = () => {
   const [page, setPage] = useState(0);
@@ -48,10 +49,11 @@ export const Home = () => {
 
   function getParks() {
     fetch(
-      `https://developer.nps.gov/api/v1/parks?start=${page}&api_key=${"IwDmrGWpHFkUs5tLwy2Miv7L7M1nIoSndJyqltEk"}&limit=50`
+      `https://developer.nps.gov/api/v1/parks?start=${page}&api_key=${"IwDmrGWpHFkUs5tLwy2Miv7L7M1nIoSndJyqltEk"}&limit=48`
     )
       .then((response) => response.json())
-      .then((data) => setParks(data.data));
+      .then((data) => setParks(data.data))
+      .catch((error) => console.log(error));
   }
   return (
     <div>
@@ -72,7 +74,8 @@ const SearchBar = (props) => {
     )
       .then((response) => response.json())
       .then((data) => props.setParks(data.data))
-      .then(console.log("testing" + searchWord));
+      .then(console.log("testing" + searchWord))
+      .catch((error) => "Error: " + error);
   }
   return (
     <div className="searchBar">
@@ -307,6 +310,7 @@ function Carousel(props) {
           <div key={step.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
+                key={index}
                 component="img"
                 sx={{
                   height: 300,
@@ -315,6 +319,10 @@ function Carousel(props) {
                   width: "100%",
                 }}
                 src={step.url}
+                onError={({ currentTarget }) => {
+                  currentTarget.onError = null;
+                  currentTarget.src = loading;
+                }}
                 alt={step.altText}
               />
             ) : null}
@@ -329,13 +337,12 @@ const BottomStepperBar = (props) => {
   const [value, setValue] = React.useState(0);
   function updatePage() {
     props.getParks();
-    window.scrollTo(0, 0);
+    window.scrollTo(1, 1);
   }
 
   return (
     <Box margin="2%">
       <BottomNavigation
-        showLabels
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
@@ -348,7 +355,8 @@ const BottomStepperBar = (props) => {
             props.page === 0
               ? () => props.setPage(0)
               : () => {
-                  props.setPage(props.page - 50);
+                  const currPage = props.page;
+                  props.setPage(currPage - 50);
                   updatePage();
                 }
           }
@@ -360,7 +368,8 @@ const BottomStepperBar = (props) => {
             props.start === 466
               ? () => props.setPage(466)
               : () => {
-                  props.setPage(props.page + 50);
+                  const currPage = props.page;
+                  props.setPage(currPage + 50);
                   updatePage();
                 }
           }

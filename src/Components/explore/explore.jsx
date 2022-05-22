@@ -36,7 +36,6 @@ export const Explore = () => {
   const [currPark, setCurrPark] = useState([]);
   const [thingsTodoList, setThingsTodoList] = useState([]);
   const [choice, setChoice] = useState(0);
-  const [alertData, setAlertData] = useState([{}]);
 
   useEffect(() => {
     getPark();
@@ -50,14 +49,6 @@ export const Explore = () => {
     )
       .then((response) => response.json())
       .then((data) => setCurrPark(data.data));
-
-    fetch(
-      `https://developer.nps.gov/api/v1/alerts?parkCode=
-          ${parkContext.parkState.parkCode}
-        &api_key=${"8yqhe2WFRMWYNZgBFRmxnub058irC6R85P9uUSIE"}`
-    )
-      .then((response) => response.json())
-      .then((data) => setAlertData(data.data));
 
     fetch(
       `https://developer.nps.gov/api/v1/thingstodo?parkCode=${
