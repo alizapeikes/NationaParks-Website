@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { DisplayParkContext } from "../State/displayParkContext";
 import { WishListContext } from "../State/wishListContext";
+import { ThingsTodoContext } from "../State/thingsToDoContext";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import SwipeableViews from "react-swipeable-views";
@@ -138,7 +139,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const QuickView = (props) => {
   const [open, setOpen] = React.useState(false);
-  const { park, setPark } = useContext(DisplayParkContext);
+  const parkContext = useContext(DisplayParkContext);
+  const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
   const navigate = useNavigate();
 
   const handleClickOpen = () => {
@@ -150,7 +152,8 @@ const QuickView = (props) => {
   };
 
   const explorePark = () => {
-    setPark(props.item);
+    parkContext.parkCodeDispatch({ parkInfo: props.item });
+    setThingsTodo({ name: props.item.fullName, list: [] });
     navigate("/explore");
   };
   return (
