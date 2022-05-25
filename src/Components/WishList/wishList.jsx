@@ -151,7 +151,10 @@ const QuickView = (props) => {
   };
 
   const explorePark = () => {
-    parkContext.parkCodeDispatch({ parkInfo: props.item });
+    parkContext.parkCodeDispatch({
+      type: "setParkDisplay",
+      parkInfo: props.item,
+    });
     setThingsTodo({ name: props.item.fullName, list: [] });
     navigate("/explore");
   };

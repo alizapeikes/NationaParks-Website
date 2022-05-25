@@ -1,9 +1,15 @@
 import React, { useReducer } from "react";
 
 const changeDisplayedParkContext = (state, action) => {
-  const newParkInfo = JSON.parse(JSON.stringify(action.parkInfo));
-
-  return newParkInfo;
+  switch (action.type) {
+    case "setParkDisplay":
+      const newParkInfo = JSON.parse(JSON.stringify(action.parkInfo));
+      return newParkInfo;
+    default:
+      throw new Error(
+        `Displayed park reducer does not recognize ${action.type}`
+      );
+  }
 };
 
 export const DisplayParkContext = React.createContext();
