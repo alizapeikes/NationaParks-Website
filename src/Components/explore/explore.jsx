@@ -79,7 +79,7 @@ export const Explore = () => {
               </Typography>
               <Divider />
               {parkContext.parkState.name === "no park chosen" ? (
-                <div>Please Choose a Park...</div>
+                <div>Please choose a park from the home page...</div>
               ) : (
                 <div className="main-content">
                   <Display
