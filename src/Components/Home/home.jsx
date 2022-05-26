@@ -46,7 +46,7 @@ export const Home = () => {
   const [parks, setParks] = useState([]);
   useEffect(() => {
     getParks();
-  }, []);
+  }, [page]);
 
   function getParks() {
     fetch(
@@ -66,6 +66,7 @@ export const Home = () => {
 
 const SearchBar = (props) => {
   const [searchWord, setSearchWord] = useState("");
+
   function handleChange(event) {
     setSearchWord(event.target.value);
   }
@@ -75,7 +76,6 @@ const SearchBar = (props) => {
     )
       .then((response) => response.json())
       .then((data) => props.setParks(data.data))
-      .then(console.log("testing" + searchWord))
       .catch((error) => "Error: " + error);
   }
   return (
@@ -262,9 +262,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const QuickView = (props) => {
   const [open, setOpen] = React.useState(false);
-  // const parkContext = useContext(DisplayParkContext);
-  // const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
-  // const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -274,14 +271,6 @@ const QuickView = (props) => {
     setOpen(false);
   };
 
-  // const explorePark = () => {
-  //   parkContext.parkCodeDispatch({
-  //     type: "setParkDisplay",
-  //     parkInfo: props.item,
-  //   });
-  //   setThingsTodo({ name: props.item.fullName, list: [] });
-  //   navigate("/explore");
-  // };
   return (
     <div>
       <Button size="small" color="primary" onClick={handleClickOpen}>
@@ -364,7 +353,7 @@ function Carousel(props) {
 const BottomStepperBar = (props) => {
   const [value, setValue] = React.useState(0);
   function updatePage() {
-    props.getParks();
+    // props.getParks();
     window.scrollTo(1, 1);
   }
 
