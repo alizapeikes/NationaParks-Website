@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { DisplayParkContext } from "../State/displayParkContext";
 import { WishListContext } from "../State/wishListContext";
 import { ThingsTodoContext } from "../State/thingsToDoContext";
@@ -144,21 +145,28 @@ const NationalParks = (props) => {
 const NationalParksCard = (props) => {
   const [openAlert, setOpenAlert] = React.useState(false);
   const { wishList, setWishList } = useContext(WishListContext);
-  const [alertText, setAlertText] = useState("Park added to wishlist!");
-  const [alertType, setAlertType] = useState("success");
+  const [inWishList, setInWishList] = useState(false);
+  useEffect(() => {
+    const index = wishList.findIndex((park) => park.id === props.item.id);
+    if (index === -1) {
+      setInWishList(false);
+    } else {
+      setInWishList(true);
+    }
+  }, [inWishList]);
   function addToWishList() {
+    const newWishList = [...wishList, props.item];
+    setWishList(newWishList);
+    setInWishList(true);
+    setOpenAlert(true);
+  }
+  function removeFromWishList() {
     const tempList = [...wishList];
     const index = tempList.findIndex((park) => park.id === props.item.id);
-    if (index === -1) {
-      const newWishList = [...wishList, props.item];
-      setWishList(newWishList);
-      setAlertText("Park added to Wish List!");
-      setAlertType("success");
-    } else {
-      setAlertText("Park already in Wish List!");
-      setAlertType("info");
-    }
-    setOpenAlert(true);
+    tempList.splice(index, 1);
+    setWishList(tempList);
+    setOpenAlert(false);
+    setInWishList(false);
   }
   return (
     <Grid item xs={3}>
@@ -186,16 +194,21 @@ const NationalParksCard = (props) => {
             park={props.item}
             openAlert={openAlert}
             setOpenAlert={setOpenAlert}
-            alert={alertText}
-            alertType={alertType}
           />
-          <Tooltip title="Add to Wish List">
-            <IconButton onClick={() => addToWishList()}>
-              <FavoriteBorderIcon
-                sx={{ color: "#1272D1", "&:hover": { color: "red" } }}
-              />
-            </IconButton>
-          </Tooltip>
+
+          {inWishList ? (
+            <Tooltip title="Remove from Wish List">
+              <IconButton onClick={() => removeFromWishList()}>
+                <FavoriteIcon sx={{ color: "#1272D1" }} />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Add to Wish List">
+              <IconButton onClick={() => addToWishList()}>
+                <FavoriteBorderIcon sx={{ color: "#1272D1" }} />
+              </IconButton>
+            </Tooltip>
+          )}
           <QuickView item={props.item} />
         </CardActions>
       </Card>
@@ -210,7 +223,7 @@ const IconAlert = (props) => {
   return (
     <Collapse in={props.openAlert}>
       <Alert
-        severity={props.alertType}
+        severity="success"
         action={
           <IconButton
             aria-label="close"
@@ -225,7 +238,7 @@ const IconAlert = (props) => {
         }
         sx={{ mb: 2 }}
       >
-        {props.alert}
+        Park added to Wish List!
       </Alert>
     </Collapse>
   );
