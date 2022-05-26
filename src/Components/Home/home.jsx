@@ -143,6 +143,9 @@ const NationalParks = (props) => {
 };
 
 const NationalParksCard = (props) => {
+  const parkContext = useContext(DisplayParkContext);
+  const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
+  const navigate = useNavigate();
   const [openAlert, setOpenAlert] = React.useState(false);
   const { wishList, setWishList } = useContext(WishListContext);
   const [inWishList, setInWishList] = useState(false);
@@ -168,6 +171,15 @@ const NationalParksCard = (props) => {
     setOpenAlert(false);
     setInWishList(false);
   }
+
+  const explorePark = () => {
+    parkContext.parkCodeDispatch({
+      type: "setParkDisplay",
+      parkInfo: props.item,
+    });
+    setThingsTodo({ name: props.item.fullName, list: [] });
+    navigate("/explore");
+  };
   return (
     <Grid item xs={3}>
       <Card
@@ -175,7 +187,7 @@ const NationalParksCard = (props) => {
         key={props.index}
         className="card"
       >
-        <CardActionArea>
+        <CardActionArea onClick={() => explorePark()}>
           <CardMedia
             component="img"
             height="140"
@@ -209,7 +221,7 @@ const NationalParksCard = (props) => {
               </IconButton>
             </Tooltip>
           )}
-          <QuickView item={props.item} />
+          <QuickView item={props.item} explorePark={explorePark} />
         </CardActions>
       </Card>
     </Grid>
@@ -250,9 +262,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const QuickView = (props) => {
   const [open, setOpen] = React.useState(false);
-  const parkContext = useContext(DisplayParkContext);
-  const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
-  const navigate = useNavigate();
+  // const parkContext = useContext(DisplayParkContext);
+  // const { thingsTodo, setThingsTodo } = useContext(ThingsTodoContext);
+  // const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -262,14 +274,14 @@ const QuickView = (props) => {
     setOpen(false);
   };
 
-  const explorePark = () => {
-    parkContext.parkCodeDispatch({
-      type: "setParkDisplay",
-      parkInfo: props.item,
-    });
-    setThingsTodo({ name: props.item.fullName, list: [] });
-    navigate("/explore");
-  };
+  // const explorePark = () => {
+  //   parkContext.parkCodeDispatch({
+  //     type: "setParkDisplay",
+  //     parkInfo: props.item,
+  //   });
+  //   setThingsTodo({ name: props.item.fullName, list: [] });
+  //   navigate("/explore");
+  // };
   return (
     <div>
       <Button size="small" color="primary" onClick={handleClickOpen}>
@@ -293,7 +305,7 @@ const QuickView = (props) => {
           <Button onClick={handleClose}>Close</Button>
           <Button
             onClick={() => {
-              explorePark();
+              props.explorePark();
             }}
           >
             Exlore Park
