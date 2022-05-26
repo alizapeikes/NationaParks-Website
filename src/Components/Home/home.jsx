@@ -66,13 +66,12 @@ export const Home = () => {
 
 const SearchBar = (props) => {
   const [searchWord, setSearchWord] = useState("");
-
   function handleChange(event) {
     setSearchWord(event.target.value);
   }
   function updateParks() {
     fetch(
-      `https://developer.nps.gov/api/v1/parks?q=${searchWord}&api_key=${"IwDmrGWpHFkUs5tLwy2Miv7L7M1nIoSndJyqltEk"}&limit=50`
+      `https://developer.nps.gov/api/v1/parks?q=${searchWord}&api_key=${"IwDmrGWpHFkUs5tLwy2Miv7L7M1nIoSndJyqltEk"}&limit=48`
     )
       .then((response) => response.json())
       .then((data) => props.setParks(data.data))
