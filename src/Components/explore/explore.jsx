@@ -228,29 +228,30 @@ const ThingsToDo = (props) => {
 
 const ThingToDoItem = (props) => {
   const [open, setOpen] = useState(false);
-  const [alertText, setAlertText] = useState("Added!");
-  const [alertType, setAlertType] = useState("success");
-  function addToItinerary() {
+  const [inItinerary, setIniternary] = useState(false);
+
+  useEffect(() => {
     const tempList = [...props.thingsTodo.list];
     const index = tempList.findIndex((todo) => todo.id === props.item.id);
     if (index === -1) {
-      const newThingsTodo = [
-        ...props.thingsTodo.list,
-        {
-          id: props.item.id,
-          name: props.item.title,
-          description: props.item.shortDescription,
-          reservation: props.item.isReservationRequired,
-          image: props.item.images[0].url,
-        },
-      ];
-      props.setThingsTodo({ name: props.park.fullName, list: newThingsTodo });
-      setAlertText("Added!");
-      setAlertType("success");
+      setIniternary(false);
     } else {
-      setAlertText("Already in Itinerary");
-      setAlertType("info");
+      setIniternary(true);
     }
+  }, [inItinerary]);
+  function addToItinerary() {
+    const newThingsTodo = [
+      ...props.thingsTodo.list,
+      {
+        id: props.item.id,
+        name: props.item.title,
+        description: props.item.shortDescription,
+        reservation: props.item.isReservationRequired,
+        image: props.item.images[0].url,
+      },
+    ];
+    props.setThingsTodo({ name: props.park.fullName, list: newThingsTodo });
+    setIniternary(true);
     setOpen(true);
   }
   return (
@@ -289,17 +290,13 @@ const ThingToDoItem = (props) => {
               variant="contained"
               sx={{ backgroundColor: "#4B90F0" }}
               onClick={() => addToItinerary()}
+              disabled={inItinerary}
             >
               Add To Itinerary
             </Button>
           </div>
           <div className="added-to-itinerary-alert">
-            <AddedToItineraryAlert
-              open={open}
-              setOpen={setOpen}
-              alertText={alertText}
-              alertType={alertType}
-            />
+            <AddedToItineraryAlert open={open} setOpen={setOpen} />
           </div>
         </div>
       </Stack>
@@ -312,7 +309,7 @@ const AddedToItineraryAlert = (props) => {
     <Box sx={{ width: "100%" }}>
       <Collapse in={props.open}>
         <Alert
-          severity={props.alertType}
+          severity="success"
           action={
             <IconButton
               aria-label="close"
@@ -327,7 +324,7 @@ const AddedToItineraryAlert = (props) => {
           }
           sx={{ mb: 2 }}
         >
-          {props.alertText}
+          "Added!"
         </Alert>
       </Collapse>
     </Box>
