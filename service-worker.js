@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/NationaParks-Website/precache-manifest.3c334a1b2fa98324d3d1121551b2c4f8.js"
+  "/NationaParks-Website/precache-manifest.006a3aff1c4369bbea11705ca2247a04.js"
 );
 
 workbox.clientsClaim();
